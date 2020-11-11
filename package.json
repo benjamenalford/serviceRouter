@@ -10,6 +10,12 @@
     "license": "ISC",
     "dependencies": {
         "express": "^4.17.1",
-        "whiskers": "^0.4.0"
+        "whiskers": "^0.4.0",
+        "bunyan": "^1.8.14",
+        "mongodb": "^1.2.13",
+        "pg": "^8.4.1"
+    },
+    "devDependencies": {
+        "nodemon": "^2.0.4"
     }
 }
