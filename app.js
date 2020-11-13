@@ -22,6 +22,7 @@ app.post('/api/', (req, res) => {
 app.listen(port, () => {
     console.log(`server loaded at ${port}`);
     logger.info("started");
-    dao.dao.write(1);
-    dao.dao.read();
+    dao.dao.write({ id: 1 });
+    var x = dao.dao.read("test");
+    logger.info(x);
 })

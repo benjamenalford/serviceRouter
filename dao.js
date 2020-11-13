@@ -1,37 +1,44 @@
 const MongoClient = require('mongodb').MongoClient;
-let config = require('./config').config;
+const config = require('./config').config;
+const logger = require('./logger').log;
 
 exports.dao = {
-
     write: function(d) {
-        console.log("write" + d);
-        MongoClient.connect(config.db[0].url, function(err, db) {
+        console.log("write " + d + config.db.collectionName);
+        MongoClient.connect(config.db.url, function(err, db) {
             if (err) {
-                log.error(err);
+                logger.error(err);
                 throw err;
             };
             var dbo = db.db(config.db.dbName);
             var query = {};
-            dbo.collection(config.db.collectionName).find(query).toArray(function(err, result) {
-                if (err) throw err;
+            dbo.collection(config.db.collectionName).insert(d).toArray(function(err, result) {
+                if (err) {
+                    logger.error(err);
+                    throw err;
+                }
                 console.log(result.length)
                 db.close();
             });
         });
     },
     read: function(query) {
-        console.log("write" + query);
-        MongoClient.connect(config.db[0].url, function(err, db) {
+        console.log("read " + query);
+        MongoClient.connect(config.db.url, function(err, db) {
             if (err) {
-                log.error(err);
+                logger.error(err);
                 throw err;
             };
             var dbo = db.db(config.db.dbName);
             query = {};
-            dbo.collection(config.db[0].collectionName).find(query).toArray(function(err, result) {
-                if (err) throw err;
-                console.log(result.length)
+            dbo.collection(config.db.collectionName).find(query).toArray(function(err, result) {
+                if (err) {
+                    logger.error(err);
+                    throw err;
+                }
+
                 db.close();
+                return result;
             });
         });
     }

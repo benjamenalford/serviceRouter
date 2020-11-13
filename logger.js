@@ -3,7 +3,7 @@ const config = require('./config').config;
 
 //var log = bunyan.createLogger({ name: 'SeeClickFixLogger' });
 exports.log = bunyan.createLogger({
-    name: 'SeeClickFixLogger',
+    name: config.appName,
     streams: [{
             level: 'info',
             stream: process.stdout,
