@@ -1,9 +1,10 @@
 const express = require('express')
 const bodyParser = require('body-parser');
 const config = require('./config').config;
+const logger = require('./logger');
 
 const app = express()
-const port = 8001
+const port = config.http;
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 //app.engine('.html', whiskers.__express);

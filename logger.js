@@ -10,12 +10,12 @@ exports.log = bunyan.createLogger({
         },
         {
             level: 'error',
-            //  stream: process.stdout,
+            stream: process.stdout,
         },
         {
             level: 'debug',
-            // stream: process.stdout,
-            path: './logs/seeClick-debug.log' //get from config
+            stream: process.stdout,
+            //path: './logs/seeClick-debug.log' //get from config
         }
     ],
     level: 'info'
