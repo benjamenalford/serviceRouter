@@ -15,7 +15,7 @@ exports.log = bunyan.createLogger({
         {
             level: 'debug',
             // stream: process.stdout,
-            path: './logs/seeClick-debug.log'
+            path: './logs/seeClick-debug.log' //get from config
         }
     ],
     level: 'info'
