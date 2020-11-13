@@ -1,10 +1,11 @@
 const express = require('express')
 const bodyParser = require('body-parser');
 const config = require('./config').config;
-const logger = require('./logger');
-
+const logger = require('./logger').log;
+const dao = require('./dao');
 const app = express()
 const port = config.http;
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 //app.engine('.html', whiskers.__express);
@@ -19,5 +20,8 @@ app.post('/api/', (req, res) => {
     res.sendStatus(200);
 })
 app.listen(port, () => {
-    console.log(`server loaded at ${port}`)
+    console.log(`server loaded at ${port}`);
+    logger.info("started");
+    dao.dao.write(1);
+    dao.dao.read();
 })
