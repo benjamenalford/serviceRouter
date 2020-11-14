@@ -24,5 +24,5 @@ app.listen(port, () => {
     logger.info("started");
     dao.dao.write({ id: 1 });
     var x = dao.dao.read("test");
-    logger.info(x);
+    console.log(x)
 })
