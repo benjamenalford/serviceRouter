@@ -12,7 +12,7 @@ exports.config = {
         //TODO make up mind
     },
     http: {
-        port: 3000
+        port: 2021
     },
     debug: false
 }

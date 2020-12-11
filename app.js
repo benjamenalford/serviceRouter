@@ -10,20 +10,30 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 //app.engine('.html', whiskers.__express);
 
-app.get('/api/', (req, res) => {
-    dao.read({}, res)
+//Read all of a collection
+app.get('/api/:collection/', (req, res) => {
+    Object.entries(req.params).forEach(([k, v]) => logger.info(`${k} : ${v}`))
+    let collection = req.params.collection;
+    dao.read({}, collection, res)
 });
 
-app.get('/api/:collection', (req, res) => {
-    dao.read({}, res)
+//read an id of a collection
+app.get('/api/:collection/id/:id', (req, res) => {
+    Object.entries(req.params).forEach(([k, v]) => logger.info(`${k} : ${v}`))
+    let collection = req.params.collection;
+    let query = req.params.id;
+    dao.read({ "id": parseInt(query) }, collection, res)
 });
-// app.post('/api/', (req, res) => {
-//     //console.log('Got body:', req.body);
-//     //console.log(req.body["results"][0]["id"])
-//     res.sendStatus(200);
-// })
+
+// post json data to a collection
+app.post('/api/:collection/', (req, res) => {
+    Object.entries(req.params).forEach(([k, v]) => logger.info(`${k} : ${v}`))
+    let collection = req.params.collection;
+    logger.info(req.body)
+    dao.write(req.body, collection, res);
+})
 
 app.listen(port, () => {
-    console.log(`server loaded at ${port.port}`);
+    logger.info(`server loaded at ${port.port}`);
     logger.info("started");
 })
